@@ -36,7 +36,7 @@ AC_CANONICAL_HOST
 ac_cv_func_malloc_0_nonnull=yes
 ac_cv_func_realloc_0_nonnull=yes
 
-AC_CHECK_FUNCS_ONCE([fdatasync])
+AC_CHECK_FUNCS_ONCE([fdatasync posix_fadvise])
 if test $ac_cv_func_fdatasync = no; then
  AC_DEFINE([fdatasync], [fsync], [Define to fsync if you lack fdatasync])
 fi

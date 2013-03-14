@@ -77,6 +77,11 @@ static couchstore_error_t couch_open(couch_file_handle* handle, const char *path
             return COUCHSTORE_ERROR_OPEN_FILE;
         }
     }
+#ifdef HAVE_POSIX_FADVISE
+    if (posix_fadvise(fd, 0, 0, POSIX_FADV_RANDOM) != 0) {
+        return COUCHSTORE_ERROR_INVALID_ARGUMENTS;
+    }
+#endif
     // Tell the caller about the new handle (file descriptor)
     *handle = fd_to_handle(fd);
     return COUCHSTORE_SUCCESS;
